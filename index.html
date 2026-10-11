@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DA.exe | پروندهٔ یک رفاقت</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&display=swap');
+
+:root {
+  --bg:#08070d;
+  --panel:#151020eF;
+  --purple:#a855f7;
+  --pink:#e879f9;
+  --text:#f5efff;
+  --muted:#aaa0bb;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Vazirmatn',Tahoma,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:2;overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-3;
+  background:
+    radial-gradient(ellipse at 10% 15%,#48116b66,transparent 40%),
+    radial-gradient(ellipse at 90% 70%,#31106466,transparent 42%),
+    #08070d;
+}
+#bubbles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+.bubble{
+  position:absolute;bottom:-110px;display:flex;align-items:center;
+  justify-content:center;text-align:center;padding:9px;
+  border:1px solid #bd75ff66;border-radius:50%;
+  color:#ead4ff;background:radial-gradient(circle at 30% 25%,#a855f72b,#21102cdd);
+  box-shadow:0 0 18px #8b35d522,inset 0 0 15px #b75cff12;
+  font-size:10px;font-weight:700;overflow-wrap:anywhere;
+  animation:floatUp linear infinite;opacity:0;
+}
+@keyframes floatUp{
+  0%{transform:translateY(0) rotate(0deg);opacity:0}
+  10%{opacity:.8}
+  85%{opacity:.7}
+  100%{transform:translateY(-125vh) rotate(24deg);opacity:0}
+}
+nav{
+  position:relative;z-index:2;display:flex;justify-content:space-between;
+  align-items:center;gap:12px;padding:18px 7%;
+  border-bottom:1px solid #ffffff10;background:#08070dcc;
+  backdrop-filter:blur(12px)
+}
+.logo{direction:ltr;color:var(--pink);font-weight:900;letter-spacing:1px}
+.nav-tag{color:var(--muted);font-size:12px}
+main{width:min(900px,90%);margin:auto}
+.hero{
+  min-height:82vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:55px 0
+}
+.terminal{
+  direction:ltr;border:1px solid #a855f766;background:#130c1cdd;
+  border-radius:10px;padding:7px 15px;color:#d7a6ff;
+  font-size:11px;margin-bottom:25px
+}
+.hero h1{font-size:clamp(36px,8vw,72px);font-weight:900;line-height:1.4}
+.hero h1 span{color:var(--purple);text-shadow:0 0 28px #a855f755}
+.hero p{max-width:580px;margin-top:16px;color:var(--muted);font-size:14px}
+.btn{
+  display:inline-block;margin-top:24px;padding:11px 23px;
+  border:1px solid var(--purple);border-radius:10px;
+  background:linear-gradient(135deg,#7e22ce,#4c1d95);
+  color:white;font:inherit;font-size:13px;font-weight:700;
+  text-decoration:none;cursor:pointer;transition:.2s;
+  box-shadow:0 0 22px #a855f722
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 0 28px #a855f755}
+section{padding:30px 0;scroll-margin-top:20px}
+.section-label{direction:ltr;text-align:left;color:var(--purple);font-size:10px;letter-spacing:3px;font-weight:800;margin-bottom:5px}
+h2{font-size:clamp(23px,5vw,32px);font-weight:900;margin-bottom:17px}
+.panel{
+  background:var(--panel);border:1px solid #ffffff13;border-radius:18px;
+  padding:clamp(20px,5vw,32px);box-shadow:0 15px 55px #0005
+}
+.panel p{color:#ddd3e9;font-size:14px;white-space:pre-line}
+.quote{border-right:3px solid var(--purple);padding-right:15px;margin-top:17px;color:#f1d9ff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px}
+.item{
+  border:1px solid #a855f733;background:#170f23e8;padding:17px 10px;
+  border-radius:14px;text-align:center;color:#eadbfa;font-size:13px;transition:.2s
+}
+.item:hover{border-color:var(--pink);transform:translateY(-3px)}
+.item strong{display:block;color:var(--pink);font-size:15px;margin-bottom:5px}
+.original-text{white-space:pre-line;color:#f0e5fb!important;line-height:2.3}
+.future-text{
+  border:1px solid #a855f744;background:#a855f70b;padding:20px;
+  border-radius:13px;white-space:pre-line;color:#f1d8ff!important
+}
+#secretMessage{
+  display:none;margin-top:24px;padding:22px;border-radius:14px;
+  border:1px solid #c084fc66;background:#a855f712;animation:reveal .6s ease
+}
+#secretMessage p{white-space:pre-line}
+@keyframes reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+footer{text-align:center;padding:35px 15px;margin-top:30px;border-top:1px solid #ffffff10;color:#81768e;font-size:11px}
+footer span{color:var(--pink)}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .bubble{animation-duration:35s!important}
+  *,*:before,*:after{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="bubbles"></div>
+
+<nav>
+  <div class="logo">DA.exe</div>
+  <div class="nav-tag">پروندهٔ یک رفاقت</div>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="terminal">SYSTEM ONLINE // FRIENDSHIP DETECTED</div>
+  <h1>DA<span>.exe</span></h1>
+  <p>یه پرونده دربارهٔ دو تا رفیق، کلی خاطره، کال‌های شبانه و چیزایی که شاید هیچ‌وقت مستقیم به هم نگفته باشن.</p>
+  <a class="btn" href="#start">باز کردن پرونده ↓</a>
+</header>
+
+<section id="start">
+  <div class="section-label">01 / HOW IT STARTED</div>
+  <h2>از کجا شروع شد؟</h2>
+  <div class="panel">
+    <p>ما از طریق کامیونیتی فن‌پیج متلی باهم آشنا شدیم. بعدش از طریق یه فن‌پیج دیگه و پانیذ بیشتر باهم آشنا شدیم، چون جفتمون از پانیذ خوشمون می‌اومد.
+
+بعداً کلی اتفاق افتاد و رفاقت با اون گروه از هم پاشید، ولی من و تو هنوز کنار هم موندیم.</p>
+  </div>
+</section>
+
+<section id="loyalty">
+  <div class="section-label">02 / STILL HERE</div>
+  <h2>هنوز کنار همیم.</h2>
+  <div class="panel">
+    <p>خیلی‌ها اومدن و رفتن، ولی تو موندی. کمکم کردی، راهنماییم کردی و چیزای زیادی بهم یاد دادی. شاید همیشه دربارهٔ این چیزا حرف نزنیم، ولی این به معنی کم‌اهمیت بودنشون نیست.</p>
+    <div class="quote">بعضی رفاقتا لازم نیست هر روز با حرف ثابت بشن؛ خودِ موندن، خیلی چیزا رو می‌گه.</div>
+  </div>
+</section>
+
+<section id="calls">
+  <div class="section-label">03 / 3AM CALLS</div>
+  <h2>کال‌هایی که یادمون نمی‌رن.</h2>
+  <div class="panel">
+    <p>تموم شبایی که باهم کال رفتیم و خندیدیم و گریه کردیم و ناراحت بودیم رو فراموش نمی‌کنم.
+
+اون خنده‌هایی که انقدر ادامه پیدا می‌کرد که حس می‌کردیم الان بالا میاریم 😂
+
+شاید خیلی وقتا فقط شوخی کنیم و حرف جدی نزنیم، ولی من یه ثانیه از اون خاطره‌ها رو با هیچ‌چیزی عوض نمی‌کنم.</p>
+  </div>
+</section>
+
+<section id="profile">
+  <div class="section-label">04 / DA SETTINGS</div>
+  <h2>پروفایل سوژهٔ پرونده 🎮</h2>
+  <div class="grid">
+    <div class="item"><strong>🎵 Music</strong>Trap</div>
+    <div class="item"><strong>🎧 Artist</strong>Trippie Redd</div>
+    <div class="item"><strong>🎶 Favorite Track</strong>fuc luv</div>
+    <div class="item"><strong>🎤 Iranian Artist</strong>پابلو</div>
+    <div class="item"><strong>💜 Color</strong>Purple</div>
+    <div class="item"><strong>🦸 Character</strong>Deadpool</div>
+    <div class="item"><strong>⚔️ Game</strong>Elden Ring</div>
+    <div class="item"><strong>🏎️ Game</strong>Forza Horizon</div>
+    <div class="item"><strong>🎯 Game</strong>Rainbow Six</div>
+  </div>
+</section>
+
+<section id="message">
+  <div class="section-label">05 / FROM MY SIDE</div>
+  <h2>حرفایی که باید بدونی.</h2>
+  <div class="panel">
+    <p class="original-text">داداش مرسی که همیشه کنارمی واقعا یه روزی همه کاراتو جبران میکنم خیلی دوستت دارم کیرت تو دهنم بره ایشالله داداش
+بهترین رفیق دنیایی
+تا الان تموم شبایی که باهم کال رفتیم و خندیدیم و گریه کردیم و ناراحت بودیم رو فراموش نمیکنم و یه ثانیه از اون چیزارو به هیچ چیزی نمی‌فروشم شاید تو ذهنت تا الان تصورت از من یک کوچولو سر بعضی از کارام بهم خورده باشه ولی مطمئن باش هیچوقت نمیفروشمت تو خیلی رفیق خوبی برای من هستی و بودی و خواهی بود و خیلی کمکم کردی</p>
+  </div>
+</section>
+
+<section id="future">
+  <div class="section-label">06 / FUTURE LOADING</div>
+  <h2>یه روزی می‌رسیم بهش.</h2>
+  <div class="panel">
+    <p class="future-text">داداش امیدوارم خیلی زودتر به آینده ای که دوسش داریم برسیم
+تو بهترین آرتیست بشی
+منم در کنارت بهترین پرودوسر بقران که سکس مکس و اینا</p>
+  </div>
+</section>
+
+<section id="secret">
+  <div class="section-label">07 / SECRET FILE</div>
+  <h2>آخرین فایل، مخصوص DA.</h2>
+  <div class="panel secret-box">
+    <p>این قسمت قفله. فقط خودت می‌تونی بازش کنی، داداش.</p>
+    <button class="btn" id="secretBtn" type="button">باز کردن فایل مخفی 🔓</button>
+    <div id="secretMessage">
+      <p>داداش، شاید زیاد بهت نگم و بیشتر وقتمون به مسخره‌بازی بگذره، ولی واقعاً خیلی دوستت دارم.
+
+مرسی که کنارمی، مرسی که کمکم کردی و مرسی که این همه خاطره باهم ساختیم.
+
+امیدوارم یه روز برسه که تو بهترین آرتیست شده باشی و منم کنارت بیت بزنم و باهم به چیزایی که می‌خواستیم برسیم.
+
+بقران که سکس مکس و اینا، فقط باید بترکونیم داداش 😂💜</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>DA.exe</span> // ساخته‌شده برای یه رفیق واقعی 💜<br>
+  Friendship status: <span>STILL ONLINE</span>
+</footer>
+
+<script>
+const phrases = [
+  "کصبابات",
+  "کیسه سیمان",
+  "وایساتانیگایی",
+  "کصینگ دیتا",
+  "کص کلیک نکن دیگه",
+  "ابلیکس میگه کصننت آسا",
+  "بزار بیاد پایین bpm",
+  "Lonely boy",
+  "نمیدم دستت تتو کیرمو",
+  "گوه نخور دیگه",
+  "میزنم بنگ بنگ بیوفتی زمین",
+  "داش",
+  "کون",
+  "ماها پسرای بدیم به همه دراگ میدیم پنج کا تو ماه پول لباس میدیم",
+  "هدوند",
+  "کاش میشد بکشمت کونتو نگه دارم",
+  "۱۳ بودم میزدم دم کون بابات",
+  "ابووول یه ماشین رد شد شبیه ماشین بابام بود",
+  "فایرینگ رنجینگ",
+  "یادمه میفروختم g الان دیگه k شده"
+];
+
+const bubbleLayer = document.getElementById("bubbles");
+
+phrases.forEach((phrase, index) => {
+  for (let copy = 0; copy < 2; copy++) {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = phrase;
+
+    const size = 78 + ((index * 17 + copy * 23) % 48);
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.left = ((index * 37 + copy * 49) % 94) + "%";
+    bubble.style.animationDuration = (17 + ((index * 3 + copy * 5) % 17)) + "s";
+    bubble.style.animationDelay = (-((index * 2 + copy * 7) % 30)) + "s";
+
+    bubbleLayer.appendChild(bubble);
+  }
+});
+
+const secretBtn = document.getElementById("secretBtn");
+const secretMessage = document.getElementById("secretMessage");
+
+secretBtn.addEventListener("click", () => {
+  const isOpen = secretMessage.style.display === "block";
+  secretMessage.style.display = isOpen ? "none" : "block";
+  secretBtn.textContent = isOpen ? "باز کردن فایل مخفی 🔓" : "بستن فایل مخفی 🔒";
+
+  if (!isOpen) {
+    secretMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+});
+</script>
+
+</body>
+</html>
